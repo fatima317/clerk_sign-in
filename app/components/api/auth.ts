@@ -1,18 +1,14 @@
-import { getAuth, clerkClient } from '@clerk/nextjs/server'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { getAuth } from '@clerk/nextjs/server'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { userId } = getAuth(req)
 
   if (!userId) {
     return res.status(401).json({ error: 'Unauthorized' })
   }
 
-  const client = await clerkClient()
+  // retrieve data from your database
 
-  const user = await client.users.getUser(userId)
-
-  // use the user object to decide what data to return
-
-  return res.status(200).json({})
+  res.status(200).json({})
 }
